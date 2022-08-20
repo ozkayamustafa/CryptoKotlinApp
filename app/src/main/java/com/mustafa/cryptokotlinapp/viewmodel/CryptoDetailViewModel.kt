@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import com.mustafa.cryptokotlinapp.model.CryptoModel
 import com.mustafa.cryptokotlinapp.repository.CryptoRepoSitory
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -14,13 +15,15 @@ class CryptoDetailViewModel
     BaseViewModel(application)
 {
 
-      var cryptoDetailCurrency = mutableStateOf<String>("")
+    /*  var cryptoDetailCurrency = mutableStateOf<String>("")
       var cryptoDetailPrice = mutableStateOf<String>("")
 
       fun getDetailsData(currecy:String,prices:String){
-            cryptoDetailCurrency.value = currecy
-            cryptoDetailPrice.value = prices
+           launch {
+               cryptoDetailCurrency.value = currecy
+               cryptoDetailPrice.value = prices
+           }
       }
-
+*/
 
 }

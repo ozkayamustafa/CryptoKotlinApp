@@ -1,11 +1,12 @@
 package com.mustafa.cryptokotlinapp.service
 
 import com.mustafa.cryptokotlinapp.util.Contants
+import dagger.hilt.android.scopes.ActivityRetainedScoped
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+@ActivityRetainedScoped
 class CryptoService {
-
     companion object{
         @Volatile private  var retrofit:Retrofit? = null
         private val lock = Any()

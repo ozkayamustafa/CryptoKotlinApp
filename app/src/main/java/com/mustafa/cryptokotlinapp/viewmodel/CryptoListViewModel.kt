@@ -3,6 +3,7 @@ package com.mustafa.cryptokotlinapp.viewmodel
 import android.app.Application
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.mustafa.cryptokotlinapp.model.CryptoModel
 import com.mustafa.cryptokotlinapp.repository.CryptoRepoSitory
 import com.mustafa.cryptokotlinapp.util.Resource
@@ -58,30 +59,33 @@ constructor(private  val repository: CryptoRepoSitory,application: Application):
 
         }
 
-
-
     }
 
 
     fun getDataList(){
-        launch {
-            var result = repository.getCryptoList()
 
+            viewModelScope.launch {
+                isLoading.value = true
+            val result = repository.getCryptoList()
             when(result){
                 is Resource.Success ->{
+                    println("success girdi")
                         var cryptoItems = result.data!!.mapIndexed { index, cryptoModel ->
-                            CryptoModel(cryptoModel.currency?:"",cryptoModel.prices?:"")
-                        } as List<CryptoModel>
+                            CryptoModel(cryptoModel.currency ?: "",cryptoModel.price ?: "")
+                        }
                     error.value = ""
                     isLoading.value = false
                     cryptoList.value += cryptoItems
                 }
                 is Resource.Error ->{
+                    println("error girdi")
                             error.value = result.message!!
                             isLoading.value = false
                 }
 
             }
+
+
 
         }
 
